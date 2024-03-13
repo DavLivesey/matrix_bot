@@ -1,17 +1,22 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher, types
-from aiogram.filters import Command
-from mustafar import BOT_API
+from aiogram.filters import Command, CommandStart
+from aiogram.enums import ParseMode
+from aiogram.types import Message
+from mustafar import config
 
 
-bot = Bot(token=BOT_API)
+bot = Bot(token=config.bot_token.get_secret_value())
 logging.basicConfig(level=logging.INFO)
 dp = Dispatcher()
 
 @dp.message(Command("start"))
-async def cmd_start(message: types.Message):
-    await message.answer("Ну привет!")
+async def send_message(message: Message):
+    user = message.from_user
+    await bot.send_message(chat_id=-1002098726070, text=f"Пользователь {user.first_name} "\
+                            f"{user.last_name} под ником {user.username} хочет присоединиться к Вам",
+                              parse_mode=ParseMode.HTML)
 
 async def main():
     await dp.start_polling(bot)
