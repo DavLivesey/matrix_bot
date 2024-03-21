@@ -1,5 +1,7 @@
 import asyncio
 import logging
+from syslog import LOG_PERROR
+import time
 import asyncpg
 from config import HOST, PG_PSWD, PG_USER
 
@@ -8,7 +10,7 @@ logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s'
                     level=logging.INFO)
 
 async def create_db():
-    create_db_command = open('create_db.sql', 'r').read()
+    create_db_command = open('/home/BLOOD.LOCAL/admin_sz/Projects/matrix_bot/create_dbl.sql', 'r').read()
     logging.info('Connection to db...')
     conn: asyncpg.Connection = await asyncpg.connect(
         user=PG_USER,
@@ -29,5 +31,9 @@ async def create_pool():
 
 
 if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(create_db())
+    while True:
+        try:
+            loop.run_until_complete(create_db())
+        except:
+            time.sleep(5)
+        loop = asyncio.get_event_loop()

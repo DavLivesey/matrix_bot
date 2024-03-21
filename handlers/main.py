@@ -1,10 +1,6 @@
-from aiogram import types
-from asyncpg import Connection, Record
-from asyncpg.exceptions import UniqueViolationError
+from asyncpg import Connection
 
-from config import ADMIN_LIST
-from loader import db, dp, bot
-
+from loader import db
 
 class DBCommands:
     pool: Connection = db

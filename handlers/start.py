@@ -1,13 +1,12 @@
-import asyncio
+from .callbacks.admins import ADDUSER
 import logging
-from aiogram import Bot, Dispatcher, types
-from aiogram.filters import Command, CommandStart
+from aiogram import Bot, F, Dispatcher
+from aiogram.filters import Command
 from aiogram.enums import ParseMode
 from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from config import BOT_TOKEN, ADMIN_LIST
 
 
-print(ADMIN_LIST)
 bot = Bot(token=BOT_TOKEN)
 logging.basicConfig(level=logging.INFO)
 dp = Dispatcher()
@@ -29,7 +28,7 @@ async def send_message(message: Message):
     admin_keyboard = InlineKeyboardMarkup(inline_keyboard=
         [
         [   
-            InlineKeyboardButton(text="Создать пользователя", callback_data='add_user'),
+            InlineKeyboardButton(text="Создать пользователя", callback_data=ADDUSER),
             InlineKeyboardButton(text="Посмотреть пользователя", callback_data='see_user'),
             InlineKeyboardButton(text='Редактировать пользователя', callback_data='edit_user'),
             InlineKeyboardButton(text='Удалить пользователя', callback_data='delete_user')
@@ -41,4 +40,5 @@ async def send_message(message: Message):
         await message.reply(text='Что Вы хотите делать?', reply_markup=admin_keyboard)
     else:
         await message.reply(text='Что Вы хотите делать?', reply_markup=user_keyboard) 
+
 

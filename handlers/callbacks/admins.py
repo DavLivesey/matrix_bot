@@ -1,8 +1,16 @@
-from loader import dp 
-from aiogram import types
-from main import DBCommands
+from aiogram import types, F
+from ..main import DBCommands
+from data import ADDUSER
+from loader import dp
+from aiogram.filters import command
+from aiogram.filters.state import StateFilter
 
 
-dp.callback_query('add_user')
-async def add_user(callback: types.CallbackQuery, fullname):
-    await DBCommands.add_new_user(fullname=fullname)
+adduser = ADDUSER()
+class Dialog(StateFilter):
+    otvet = StateFilter()
+    
+@dp.message_handler(command='add_user')
+async def start_adding(message: types.Message):
+    await Dialog.otvet.states
+    await message.reply('Введите ФИО')
