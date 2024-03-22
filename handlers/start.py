@@ -1,6 +1,6 @@
 from .callbacks.admins import ADDUSER
 import logging
-from aiogram import Bot, F, Dispatcher
+from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
 from aiogram.enums import ParseMode
 from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup

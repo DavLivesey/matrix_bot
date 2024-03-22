@@ -12,6 +12,3 @@ create table users
     SED BOOLEAN DEFAULT FALSE,
 
 );
-
-alter table users
-    owner to postgres
