@@ -1,7 +1,5 @@
 import asyncio
 import logging
-from syslog import LOG_PERROR
-import time
 import asyncpg
 from config import HOST, PG_PSWD, PG_USER
 
@@ -31,9 +29,5 @@ async def create_pool():
 
 
 if __name__ == '__main__':
-    while True:
-        try:
-            loop.run_until_complete(create_db())
-        except:
-            time.sleep(5)
-        loop = asyncio.get_event_loop()
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(create_pool())
