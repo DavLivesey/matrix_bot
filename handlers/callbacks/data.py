@@ -1,6 +1,7 @@
 from aiogram.filters.callback_data import CallbackData
 
 class ADDUSER(CallbackData, prefix='add_user'):
+    id: int
     fullname: str
     apteka: bool
     zkgu: bool

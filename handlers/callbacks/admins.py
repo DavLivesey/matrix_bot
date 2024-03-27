@@ -1,16 +1,19 @@
-from aiogram import types, F
+from aiogram import types, F, Router
 from ..main import DBCommands
-from data import ADDUSER
+from .data import ADDUSER
 from loader import dp
-from aiogram.filters import command
-from aiogram.filters.state import StateFilter
+from aiogram.filters import Command
+from aiogram.fsm.state import StatesGroup, State
+from aiogram.fsm.context import FSMContext
 
-
-adduser = ADDUSER()
-class Dialog(StateFilter):
-    otvet = StateFilter()
+router = Router()
+#adduser = ADDUSER()
+class Dialog(StatesGroup):
+    answer = State()
     
-@dp.message_handler(command='add_user')
-async def start_adding(message: types.Message):
+@router.message(Command('add_fullname'))
+async def start_adding(message: types.Message, state: FSMContext):
+    print('urra')
     await Dialog.otvet.states
     await message.reply('Введите ФИО')
+    await state.set_data(Dialog.answer)

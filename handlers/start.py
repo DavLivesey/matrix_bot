@@ -1,4 +1,4 @@
-from .callbacks.admins import ADDUSER
+#from .callbacks.admins import ADDUSER
 import logging
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
@@ -28,7 +28,7 @@ async def send_message(message: Message):
     admin_keyboard = InlineKeyboardMarkup(inline_keyboard=
         [
         [   
-            InlineKeyboardButton(text="Создать пользователя", callback_data=ADDUSER),
+            InlineKeyboardButton(text="Создать пользователя", callback_data='add_fullname'),
             InlineKeyboardButton(text="Посмотреть пользователя", callback_data='see_user'),
             InlineKeyboardButton(text='Редактировать пользователя', callback_data='edit_user'),
             InlineKeyboardButton(text='Удалить пользователя', callback_data='delete_user')

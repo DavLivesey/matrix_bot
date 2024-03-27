@@ -4,6 +4,8 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 
+from handlers.callbacks.admins import router
+
 import config
 from sql import create_pool
 
@@ -15,3 +17,4 @@ bot = Bot(token=config.BOT_TOKEN)
 storage = MemoryStorage()
 dp = Dispatcher()
 db = loop.run_until_complete(create_pool())
+dp.include_routers(router)
